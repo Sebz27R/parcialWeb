@@ -42,6 +42,69 @@ export const photos = [
     }
 ]
 
+export const susProducts = [
+    {
+        _id: "1111",
+        name: "Weed",
+        description: "A one 20 gram bag of premium quiality California grown zaza",
+        price: 40,
+        // TODO: add the photos
+        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        category: "Smokable",
+        featured: true
+    },
+    {
+        _id: "1112",
+        name: "Cocaine",
+        description: "1 gram bag of Colombian luxury made cocaine",
+        price: 170,
+        // TODO: add the photos
+        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        category: "Snorted",
+        featured: true
+    },
+    {
+        _id: "1113",
+        name: "Fentanyl",
+        description: "1 gram bag of Fentanyl",
+        price: 200,
+        // TODO: add the photos
+        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        category: "Injections",
+        featured: true
+    },
+    {
+        _id: "1114",
+        name: "Meth",
+        description: "1 gram bag of Meth",
+        price: 50,
+        // TODO: add the photos
+        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        category: "Snorted",
+        featured: false
+    },
+    {
+        _id: "1115",
+        name: "LSD",
+        description: "1 gram bag of LSD",
+        price: 100,
+        // TODO: add the photos
+        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        category: "Skin Absorbable",
+        featured: false
+    },
+    {
+        _id: "1116",
+        name: "Heroin",
+        description: "1 gram bag of Heroin",
+        price: 150,
+        // TODO: add the photos
+        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        category: "Injections",
+        featured: false
+    }
+]
+
 export const products = [
     {
         _id: "aaaa",

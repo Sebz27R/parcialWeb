@@ -4,6 +4,8 @@ const NewsletterBox = () => {
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
+
+        // TODO: add the validation to enter the "secret" page
     }
 
   return (

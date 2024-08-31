@@ -19,6 +19,7 @@ import SearchBar from './components/SearchBar'
 import ModelPage from './pages/ModelPage'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import SuspiciousPage from './pages/SuspiciousPage'
 
 
 const App = () => {
@@ -42,6 +43,9 @@ const App = () => {
         <Route path='/contact' element={<Contact/>} />
         <Route path='/photos/:photoId' element={<Photo/>} />
         <Route path='/models/:modelId' element={<ModelPage/>} />
+        <Route path='/suspicious-page' element={<SuspiciousPage/>} />
+        <Route path='/product/suspicious/:productId' element={<Product/>} />
+        <Route path='*' element={<h1>Not Found</h1>} />
 
       </Routes>
       <Footer/>
