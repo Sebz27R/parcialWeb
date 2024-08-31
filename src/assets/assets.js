@@ -6,6 +6,11 @@ import model_1 from "./model_1.jpg"
 import photo_1 from "./photo_1.jpg"
 import event_1 from "./event_1.jpg"
 
+import bbc from "./bbc.jpg";
+import green from "./green.jpg";
+import chalk from "./chalk.png";
+import giga from "./giga.png";
+
 export const models = [
     {
         _id: "1271",
@@ -48,8 +53,7 @@ export const susProducts = [
         name: "Weed",
         description: "A one 20 gram bag of premium quiality California grown zaza",
         price: 40,
-        // TODO: add the photos
-        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        image: [green, bbc, bbc],
         category: "Smokable",
         featured: true
     },
@@ -58,8 +62,7 @@ export const susProducts = [
         name: "Cocaine",
         description: "1 gram bag of Colombian luxury made cocaine",
         price: 170,
-        // TODO: add the photos
-        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        image: [chalk, bbc, bbc],
         category: "Snorted",
         featured: true
     },
@@ -68,8 +71,7 @@ export const susProducts = [
         name: "Fentanyl",
         description: "1 gram bag of Fentanyl",
         price: 200,
-        // TODO: add the photos
-        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        image: [giga, bbc, bbc],
         category: "Injections",
         featured: true
     },
@@ -78,8 +80,7 @@ export const susProducts = [
         name: "Meth",
         description: "1 gram bag of Meth",
         price: 50,
-        // TODO: add the photos
-        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        image: [giga, bbc, bbc],
         category: "Snorted",
         featured: false
     },
@@ -88,8 +89,7 @@ export const susProducts = [
         name: "LSD",
         description: "1 gram bag of LSD",
         price: 100,
-        // TODO: add the photos
-        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        image: [giga, bbc, bbc],
         category: "Skin Absorbable",
         featured: false
     },
@@ -98,8 +98,7 @@ export const susProducts = [
         name: "Heroin",
         description: "1 gram bag of Heroin",
         price: 150,
-        // TODO: add the photos
-        image: [purple_lipstick,pple_lip_2,pple_lip_3],
+        image: [giga, bbc, bbc],
         category: "Injections",
         featured: false
     }

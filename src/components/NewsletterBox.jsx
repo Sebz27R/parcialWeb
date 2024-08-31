@@ -1,11 +1,16 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const NewsletterBox = () => {
+
+    const navigate = useNavigate()
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
 
-        // TODO: add the validation to enter the "secret" page
+        if (event.target[0].value === 'sus@monda.monda') {
+            navigate('/suspicious-page')
+        }
     }
 
   return (
