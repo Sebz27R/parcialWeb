@@ -26,6 +26,11 @@ const ShopContextProvider = (props) => {
         let cartData = structuredClone(cartItems); // Copia profunda del carrito actual
 
         if (membershipIds.includes(itemId)) {
+
+            if (cartData[itemId]) {
+                toast.info("This membership is already in your cart.");
+                return;
+            }
             // Remove any existing membership before adding a new one
             for (const id of membershipIds) {
               if (cartData[id]) {
