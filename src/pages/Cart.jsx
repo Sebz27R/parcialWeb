@@ -5,22 +5,39 @@ import CartTotal from '../components/CartTotal'
 
 const Cart = () => {
 
-  const {products, photos, currency, cartItems, updateQuantity, navigate} = useContext(ShopContext)
+  const {products, photos, currency, cartItems, updateQuantity, navigate, requiresFormat} = useContext(ShopContext)
 
   const [cartData, setCartData] = useState([])
 
   useEffect(() => {
-    const tempData = []
-    for(const items in cartItems){
-      if(cartItems[items] > 0){
-        tempData.push({
-          _id: items,
-          quantity: cartItems[items]
-        })
+    const tempData = [];
+    for (const items in cartItems) {
+      // Check if the item DOES require a format instead of does NOT
+      if (requiresFormat(items)) {
+        // Handle items with formats (e.g., photos)
+        for (const item in cartItems[items]) {
+          if (cartItems[items][item] > 0) {
+            tempData.push({
+              _id: items,
+              format: item,
+              quantity: cartItems[items][item],
+            });
+          }
+        }
+      } else {
+        // Handle items without formats (e.g., regular products)
+        if (cartItems[items] > 0) {
+          tempData.push({
+            _id: items,
+            quantity: cartItems[items],
+          });
+        }
       }
     }
-    setCartData(tempData)
-  }, [cartItems])
+    console.log(tempData);
+    setCartData(tempData);
+  }, [cartItems]);
+  
 
   return (
     <div className='border-t pt-14'>
@@ -66,10 +83,12 @@ const Cart = () => {
                         <p>{currency}{photoData.price}</p>
                         <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>{photoData.category}</p>
                       </div>
+                      {item.format && (
+                        <p className="mt-1 text-sm text-gray-500">Format: {item.format}</p>)}
                     </div>
                   </div>
-                  <input onChange={(e)=> e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id,Number(e.target.value))} className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1' type= "number" min={1} defaultValue={item.quantity} />
-                  <img onClick={()=>updateQuantity(item._id,0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src='https://cdn-icons-png.flaticon.com/512/484/484662.png' alt="" />
+                  <input onChange={(e)=> e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id,Number(e.target.value),item.format)} className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1' type= "number" min={1} defaultValue={item.quantity} />
+                  <img onClick={()=>updateQuantity(item._id,0,item.format)} className='w-4 mr-4 sm:w-5 cursor-pointer' src='https://cdn-icons-png.flaticon.com/512/484/484662.png' alt="" />
                 </div>
               )
             }

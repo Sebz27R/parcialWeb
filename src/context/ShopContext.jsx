@@ -63,7 +63,7 @@ const ShopContextProvider = (props) => {
 
 
     useEffect(()=>{
-        console.log(cartItems)
+        // console.log(cartItems)
     },[cartItems])
 
     const getCartCount = () => {
@@ -93,13 +93,37 @@ const ShopContextProvider = (props) => {
     };
     
 
-    const updateQuantity = async (itemId,quantity) => {
-        let cartData = structuredClone(cartItems)
-
-        cartData[itemId] = quantity
-
-        setCartItems(cartData)
-    }
+    const updateQuantity = async (itemId, quantity, format = null) => {
+        // Clone the cartItems to avoid directly mutating the state
+        let cartData = structuredClone(cartItems);
+      
+        if (format) {
+          // Update quantity for items with formats (like photos)
+          if (cartData[itemId] && typeof cartData[itemId] === 'object') {
+            cartData[itemId][format] = quantity;
+          }
+        } else {
+          // Update quantity for items without formats (regular products)
+          cartData[itemId] = quantity;
+        }
+      
+        // Remove items with zero quantity to avoid clutter in the cart
+        if (quantity <= 0) {
+          if (format && cartData[itemId][format] !== undefined) {
+            delete cartData[itemId][format]; // Delete specific format when quantity is zero
+            // Clean up the item if no formats are left
+            if (Object.keys(cartData[itemId]).length === 0) {
+              delete cartData[itemId];
+            }
+          } else if (!format) {
+            delete cartData[itemId]; // Delete item without format when quantity is zero
+          }
+        }
+      
+        // Update state with the modified cart data
+        setCartItems(cartData);
+      };
+      
 
     const getCartAmount = () => {
         let totalAmount = 0;
@@ -141,7 +165,7 @@ const ShopContextProvider = (props) => {
         search, setSearch, showSearch,setShowSearch,
         cartItems, addToCart, getCartCount,
         updateQuantity, getCartAmount,
-        navigate, models, photos, events
+        navigate, models, photos, events,requiresFormat
     }
 
     return (
