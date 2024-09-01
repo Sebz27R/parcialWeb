@@ -36,15 +36,14 @@ const EventItem = ({id, name, image,date, location, participating_models, produc
         <div className=' overflow-hidden'>
             <img className='hover:scale-110 transition ease-in-out w-48 h-48 object-cover overflow-hidden' src={image} alt=""/>
         </div>
-        <p className='pt-3 pb-1 text-sm'>{name}</p>
-        <p className='pt-3 pb-1 text-sm'>Location: {location}</p>
-        <p className='text-sm font-medium'>Date: {date}</p>
-        <p className='pt-3 pb-1 text-sm'>Location: {location}</p>
-        <p className='text-sm font-medium'>Participating models: {modelNames.map((name, index) => (
-          <li key={index} className='text-lg'>{name}</li>
+        <p className='pt-3 pb-1 text-lg font-bold'>{name}</p>
+        <p className='pt-3 pb-1 text-sm'><span className='font-bold'>Location:</span> {location}</p>
+        <p className='text-sm pb-1'><span className='font-bold'>Date:</span> {date}</p>
+        <p className='text-sm pb-1'><span className='font-bold'>Models participating:</span> {modelNames.map((name, index) => (
+          <li key={index} className='text-sm'>{name}</li>
         ))}</p>
-        <p className='text-sm font-medium'>Products showcased:  {productNames.map((name, index) => (
-          <li key={index} className='text-lg'>{name}</li>
+        <p className='text-sm '><span className='font-bold'>Products showcased:</span> {productNames.map((name, index) => (
+          <li key={index} className='text-sm'>{name}</li>
         ))}</p>
     </div>
   )

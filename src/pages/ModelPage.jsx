@@ -48,7 +48,7 @@ const ModelPage = () => {
 
           {/*Info */}
           <div className='flex-1'>
-            <h1 className='font-medium text-2xl mt-2' >{productData.name}</h1>
+            <h1 className='mt-5 text-3xl font-medium' >{productData.name}</h1>
             <div className='flex item-center gap-1 mt-2'>
               <img src='https://cdn.iconscout.com/icon/free/png-256/free-star-bookmark-favorite-shape-rank-16-28621.png' alt="" className="w-5 5" />
               <img src='https://cdn.iconscout.com/icon/free/png-256/free-star-bookmark-favorite-shape-rank-16-28621.png' alt="" className="w-5 5" />
@@ -57,8 +57,8 @@ const ModelPage = () => {
               <img src='https://cdn.iconscout.com/icon/free/png-256/free-star-bookmark-favorite-shape-rank-16-28621.png' alt="" className="w-5 5" />
               <p className='pl-2'>(122)</p>
             </div>
-            <p className='mt-5 text-3xl font-medium'>Booking information: {productData.booking_info}</p>
-            <p className='mt-5 text-gray-500 md:w-4/5'>{productData.achievements[0]}</p>
+            <p className='font-medium text-2xl mt-2'>Booking information: {productData.booking_info}</p>
+            <p className='mt-5 text-gray-500 md:w-4/5'>Achievements: {productData.achievements[0]}</p>
             {/*Select -------- 
             
             <div className='flex flex-col gap-4 my-8'>
@@ -71,10 +71,10 @@ const ModelPage = () => {
             */}
             {/* <button onClick={() => addToCart(productData._id)} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>ADD TO CART</button> */}
             <hr className='mt-8 sm:w-4/5'/>
-            <div className='text-sm text-gray-500 mt-5 flex flex-col gap-1'>
-              <p>100% Original Product</p>
-              <p>Cash on delivery is available on this product</p>
-              <p>Easy return and exchange policy within 7 days</p>
+            <div className='text-base text-gray-500 mt-5 flex flex-col gap-1'>
+              <p>100% Qualified Profesionals</p>
+              <p>More than 3 years of experience</p>
+              <p>Low cost fees</p>
             </div>
           </div>
           
