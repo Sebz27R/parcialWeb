@@ -5,7 +5,7 @@ import CartTotal from '../components/CartTotal'
 
 const Cart = () => {
 
-  const {products, photos, currency, cartItems, updateQuantity, navigate, requiresFormat} = useContext(ShopContext)
+  const {memberships,products, photos, currency, cartItems, updateQuantity, navigate, requiresFormat} = useContext(ShopContext)
 
   const [cartData, setCartData] = useState([])
 
@@ -52,7 +52,25 @@ const Cart = () => {
           cartData.map((item,index) => {
             const productData = products.find((product)=> product._id === item._id )
             const photoData = photos.find((photo)=> photo._id === item._id )
+            const membershipsData = memberships.find((membership)=> membership._id === item._id )
 
+            if (membershipsData) {
+              return (
+                <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
+                  <div className='flex items-start gap-6'>
+                    <img className='w-16 sm:-20' src={membershipsData.image} alt="" />
+                    <div>
+                      <p className='text-xs sm:text-lg font-medium'>{membershipsData.name}</p>
+                      <div className='flex items-center gap-5 mt-2'>
+                        <p>{currency}{membershipsData.price}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50 '>{membershipsData.duration}</p>
+                  <img onClick={()=>updateQuantity(item._id,0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src='https://cdn-icons-png.flaticon.com/512/484/484662.png' alt="" />
+                </div>
+              )
+            }
             if (productData) {
               return (
                 <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>

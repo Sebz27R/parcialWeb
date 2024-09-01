@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { products, susProducts } from "../assets/assets";
+import { memberships, products, susProducts } from "../assets/assets";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { models, photos, events } from "../assets/assets";
@@ -14,7 +14,7 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false)
     const [cartItems, setCartItems] = useState({})
     const navigate = useNavigate()
-
+    const membershipIds = ["0001", "0002", "0003"]; 
 
     const addToCart = async (itemId, format = null) => {
         // Si el producto requiere un formato y no se ha seleccionado, muestra el error
@@ -24,6 +24,16 @@ const ShopContextProvider = (props) => {
         }
     
         let cartData = structuredClone(cartItems); // Copia profunda del carrito actual
+
+        if (membershipIds.includes(itemId)) {
+            // Remove any existing membership before adding a new one
+            for (const id of membershipIds) {
+              if (cartData[id]) {
+                delete cartData[id]; // Remove the existing membership from the cart
+              }
+            }
+            toast.success("Membership successfully added to cart");
+          }
     
         // Si el producto ya está en el carrito
         if (cartData[itemId]) {
@@ -63,7 +73,7 @@ const ShopContextProvider = (props) => {
 
 
     useEffect(()=>{
-        // console.log(cartItems)
+        console.log(cartItems)
     },[cartItems])
 
     const getCartCount = () => {
@@ -132,6 +142,7 @@ const ShopContextProvider = (props) => {
             // Buscar la información del producto o foto correspondiente
             const itemInfo = products.find(product => product._id === itemId);
             const photoInfo = photos.find(photo => photo._id === itemId);
+            const membershipInfo = memberships.find(membership => membership._id === itemId)
             const item = cartItems[itemId];
     
             try {
@@ -139,6 +150,9 @@ const ShopContextProvider = (props) => {
                     // Caso de productos sin formato
                     if (itemInfo) {
                         totalAmount += itemInfo.price * item;
+                    }
+                    if (membershipInfo) {
+                        totalAmount += membershipInfo.price * item
                     }
                 } else if (typeof item === 'object') {
                     // Caso de productos con formato
@@ -165,7 +179,8 @@ const ShopContextProvider = (props) => {
         search, setSearch, showSearch,setShowSearch,
         cartItems, addToCart, getCartCount,
         updateQuantity, getCartAmount,
-        navigate, models, photos, events,requiresFormat
+        navigate, models, photos, events,requiresFormat,
+        memberships
     }
 
     return (

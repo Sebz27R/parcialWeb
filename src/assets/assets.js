@@ -5,6 +5,10 @@ import pple_lip_3 from "./purple_lipstick_3.jpg"
 import model_1 from "./model_1.jpg"
 import photo_1 from "./photo_1.jpg"
 import event_1 from "./event_1.jpg"
+import basic_plan from "./basic_plan.png"
+import medium_plan from "./medium_plan.png"
+import premium_plan from "./premium_plan.jpg"
+
 
 import bbc from "./bbc.jpg";
 import green from "./green.jpg";
@@ -20,6 +24,30 @@ export const models = [
         achievements:  ["First place in Miss antioquia"]
     },
     
+]
+
+export const memberships = [
+    {
+        _id: "0001",
+        name: "Basic Membership",
+        price: 100,
+        image: basic_plan,
+        duration: "1 Month subscription"
+    },
+    {
+        _id: "0002",
+        name: "Medium Membership",
+        price: 250,
+        image: medium_plan,
+        duration: "3 Month subscription"
+    },
+    {
+        _id: "0003",
+        name: "Premium Membership",
+        price: 500,
+        image: premium_plan,
+        duration: "6 Month subscription"
+    },
 ]
 
 export const events = [
