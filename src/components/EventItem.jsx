@@ -34,7 +34,7 @@ const EventItem = ({id, name, image,date, location, participating_models, produc
 
     <div className='text-gray-700'>
         <div className=' overflow-hidden'>
-            <img className='hover:scale-110 transition ease-in-out' src={image} alt=""/>
+            <img className='hover:scale-110 transition ease-in-out w-48 h-48 object-cover overflow-hidden' src={image} alt=""/>
         </div>
         <p className='pt-3 pb-1 text-sm'>{name}</p>
         <p className='pt-3 pb-1 text-sm'>Location: {location}</p>

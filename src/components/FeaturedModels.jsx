@@ -24,7 +24,7 @@ const FeaturedModels = () => {
         <div className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4 gap-y-6'>
             {
                 latestModels.map((item,index)=>(
-                  <ModelItem key={index} id={item._id} name={item.name} booking={item.booking} portfolio={item.portfolio} achievements={item.achievements}/>  
+                  <ModelItem key={index} id={item._id} name={item.name} booking={item.booking_info} portfolio={item.portfolio} achievements={item.achievements}/>  
                 ))
             }
         </div>

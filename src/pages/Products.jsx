@@ -113,7 +113,7 @@ const Products = () => {
               <input className='w-3' type='checkbox' value={'Red'} onChange={toggleSubCategory}/> Red
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type='checkbox' value={'Pink'} onChange={toggleSubCategory}/> Black
+              <input className='w-3' type='checkbox' value={'Black'} onChange={toggleSubCategory}/> Black
             </p>
             <p className='flex gap-2'>
               <input className='w-3' type='checkbox' value={'Light'} onChange={toggleSubCategory}/> Light
