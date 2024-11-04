@@ -11,7 +11,7 @@ const Navbar = () => {
     <div className='flex items-center justify-between py-5 font-medium'>
 
         <Link to='/'>
-            <img src='https://shirtstore.eu/cdn/shop/collections/Scarface_1024_1200x1200.png?v=1686302153' className='w-36' alt="" />
+            <img src='https://cdn2.steamgriddb.com/logo/70dc431987c296785a0a7888f3fe7ecb.png' className='w-36' alt="" />
         </Link>
         <ul className='hidden sm:flex gap-5 text-sm text-gray-700'>
 
