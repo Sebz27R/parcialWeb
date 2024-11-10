@@ -4,8 +4,8 @@ import axios from 'axios'
 import { backendUrl } from '../App'
 import { toast } from 'react-toastify'
 
-const Add = ({token}) => {
 
+const AddSusProduct = ({token}) => {
   const [image1, setImage1] = useState(false)
   const [image2, setImage2] = useState(false)
   const [image3, setImage3] = useState(false)
@@ -14,10 +14,8 @@ const Add = ({token}) => {
   const [name,setName] = useState("")
   const [description,setDescription] = useState("")
   const [price,setPrice] = useState("")
-  const [category,setCategory] = useState("Lipsticks")
-  const [color,setColor] = useState("Red")
+  const [category,setCategory] = useState("Smokable")
   const [featured, setFeatured] = useState(false)
-  const [format,setFormat] = useState([])
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
@@ -29,16 +27,14 @@ const Add = ({token}) => {
       formData.append("description",description)
       formData.append("price",price)
       formData.append("category",category)
-      formData.append("color",color)
       formData.append("featured",featured)
-      // formData.append("format",JSON.stringify(format))
 
       image1 && formData.append("image1",image1)
       image2 && formData.append("image2",image2)
       image3 && formData.append("image3",image3)
       image4 && formData.append("image4",image4)
 
-      const response = await axios.post(backendUrl + "/api/product/add", formData, {headers:{token}})
+      const response = await axios.post(backendUrl + "/api/susProduct/add", formData, {headers:{token}})
 
       if(response.data.success){
 
@@ -99,22 +95,11 @@ const Add = ({token}) => {
         <div>
           <p className='mb-2'>Product category</p>
           <select onChange={(e)=> setCategory(e.target.value)} className='w-full px-3 py-2'>
-            <option value="Lipsticks">Lipsticks</option>
-            <option value="Foundations">Foundations</option>
-            <option value="Eye shadows">Eye shadows</option>
-            <option value="Highlighters">Highlighters</option>
-            <option value="Nail polishes">Nail polishes</option>
-          </select>
-        </div>
-
-        <div>
-          <p className='mb-2'>Product color</p>
-          <select onChange={(e)=> setColor(e.target.value)} className='w-full px-3 py-2'>
-            <option value="Purple">Purple</option>
-            <option value="Red">Red</option>
-            <option value="Black">Black</option>
-            <option value="Light">Light</option>
-            <option value="Dark">Dark</option>
+            <option value="Smokable">Smokable</option>
+            <option value="Edible">Edible</option>
+            <option value="Injections">Injections</option>
+            <option value="Snorted">Snorted</option>
+            <option value="Skin Absorbable">Skin Absorbable</option>
           </select>
         </div>
 
@@ -150,4 +135,4 @@ const Add = ({token}) => {
   )
 }
 
-export default Add
+export default AddSusProduct

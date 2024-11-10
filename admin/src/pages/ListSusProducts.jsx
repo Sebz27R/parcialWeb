@@ -3,16 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { backendUrl, currency } from '../App'
 import { toast } from 'react-toastify'
 
-const List = ({token}) => {
-
+const ListSusProducts = ({token}) => {
   const [list,setList] = useState([])
 
   const fetchList = async () => {
     try {
 
-      const response = await axios.get(backendUrl + '/api/product/list')
+      const response = await axios.get(backendUrl + '/api/susProduct/list')
       if(response.data.success){
-        setList(response.data.products)
+        setList(response.data.susProducts)
       } else {
         toast.error(response.data.message)
       }
@@ -24,11 +23,11 @@ const List = ({token}) => {
     }
   }
 
-  const removeProduct = async (id)=> {
+  const removeSusProduct = async (id)=> {
 
     try {
 
-      const response = await axios.post(backendUrl + '/api/product/remove', {id}, {headers:{token}})
+      const response = await axios.post(backendUrl + '/api/susProduct/remove', {id}, {headers:{token}})
 
       if (response.data.success){
         toast.success(response.data.message)
@@ -50,7 +49,7 @@ const List = ({token}) => {
 
   return (
     <>
-      <p className='mb-2'>All Products List</p>
+      <p className='mb-2'>All Sus Products List</p>
       <div className='flex flex-col gap-2'>
         {/* List table title */}
 
@@ -71,7 +70,7 @@ const List = ({token}) => {
               <p>{item.name}</p>
               <p>{item.category}</p>
               <p>{currency}{item.price}</p>
-              <p onClick={()=>removeProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
+              <p onClick={()=>removeSusProduct(item._id)} className='text-right md:text-center cursor-pointer text-lg'>X</p>
             </div>
           ))
         }
@@ -80,4 +79,4 @@ const List = ({token}) => {
   )
 }
 
-export default List
+export default ListSusProducts
