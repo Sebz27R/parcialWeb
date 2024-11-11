@@ -55,7 +55,7 @@ const SuspiciousPage = () => {
   
     useEffect(() => {
       applyFilter()
-    }, [category, search, showSearch])
+    }, [category, search, showSearch,susProducts])
   
     useEffect(() => {
       sortProduct()

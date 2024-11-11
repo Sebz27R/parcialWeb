@@ -5,7 +5,7 @@ import CartTotal from '../components/CartTotal'
 
 const Cart = () => {
 
-  const {memberships,products, photos, currency, cartItems, updateQuantity, navigate, requiresFormat} = useContext(ShopContext)
+  const {susProducts,memberships,products, photos, currency, cartItems, updateQuantity, navigate, requiresFormat} = useContext(ShopContext)
 
   const [cartData, setCartData] = useState([])
 
@@ -51,6 +51,7 @@ const Cart = () => {
         {
           cartData.map((item,index) => {
             const productData = products.find((product)=> product._id === item._id )
+            const susProductData = susProducts.find((susProduct)=> susProduct._id === item._id )
             const photoData = photos.find((photo)=> photo._id === item._id )
             const membershipsData = memberships.find((membership)=> membership._id === item._id )
 
@@ -81,6 +82,24 @@ const Cart = () => {
                       <div className='flex items-center gap-5 mt-2'>
                         <p>{currency}{productData.price}</p>
                         <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>{productData.color}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <input onChange={(e)=> e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id,Number(e.target.value))} className='border max-w-10 sm:max-w-20 px-1 sm:px-2 py-1' type= "number" min={1} defaultValue={item.quantity} />
+                  <img onClick={()=>updateQuantity(item._id,0)} className='w-4 mr-4 sm:w-5 cursor-pointer' src='https://cdn-icons-png.flaticon.com/512/484/484662.png' alt="" />
+                </div>
+              )
+            }
+            if (susProductData) {
+              return (
+                <div key={index} className='py-4 border-t border-b text-gray-700 grid grid-cols-[4fr_0.5fr_0.5fr] sm:grid-cols-[4fr_2fr_0.5fr] items-center gap-4'>
+                  <div className='flex items-start gap-6'>
+                    <img className='w-16 sm:-20' src={susProductData.image[0]} alt="" />
+                    <div>
+                      <p className='text-xs sm:text-lg font-medium'>{susProductData.name}</p>
+                      <div className='flex items-center gap-5 mt-2'>
+                        <p>{currency}{susProductData.price}</p>
+                        <p className='px-2 sm:px-3 sm:py-1 border bg-slate-50'>{susProductData.category}</p>
                       </div>
                     </div>
                   </div>

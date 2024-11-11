@@ -11,6 +11,8 @@ import modelRouter from './routes/modelRoute.js'
 import membershipRouter from './routes/membershipRoute.js'
 import photoRouter from './routes/photoRoute.js'
 import susProductRouter from './routes/susProductRoute.js'
+import cartRouter from './routes/cartRoute.js'
+import orderRouter from './routes/orderRoute.js'
 
 //App config
 const app = express()
@@ -31,6 +33,8 @@ app.use('/api/model',modelRouter)
 app.use('/api/membership',membershipRouter)
 app.use('/api/photo',photoRouter)
 app.use('/api/susProduct',susProductRouter)
+app.use('/api/cart',cartRouter)
+app.use('/api/order',orderRouter)
 
 app.get('/', (req,res)=> {
     res.send("Api working")

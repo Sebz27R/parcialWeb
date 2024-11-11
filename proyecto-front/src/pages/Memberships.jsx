@@ -33,21 +33,21 @@ const Memberships = () => {
           <p className='text-gray-600'> Our basic plan allows to every member to enjoy all the benefits of a Scarface Member for a whole Month!!
           </p>
           <h1 className='text-3xl font-bold'>PRICE: $100 </h1>
-          <button onClick={()=> addToCart("0001")} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>PURCHASE NOW</button>
+          <button onClick={()=> addToCart("672edde208c785b6111167c0")} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>PURCHASE NOW</button>
         </div>
         <div className='border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5'>
           <b>Medium Plan</b>
           <p className='text-gray-600'>  Our basic plan allows to every member to enjoy all the benefits of a Scarface Member for 3 Months!!
           </p>
           <h1 className='text-3xl font-bold'>PRICE: $250 </h1>
-          <button onClick={()=> addToCart("0002")} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>PURCHASE NOW</button>
+          <button onClick={()=> addToCart("672ede0608c785b6111167c2")} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>PURCHASE NOW</button>
         </div>
         <div className='border px-10 md:px-16 py-8 sm:py-20 flex flex-col gap-5'>
           <b>Premium Plan</b>
           <p className='text-gray-600'> Our basic plan allows to every member to enjoy all the benefits of a Scarface Member for 6 Months!!
           </p>
           <h1 className='text-3xl font-bold'>PRICE: $500 </h1>
-          <button onClick={()=> addToCart("0003")} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>PURCHASE NOW</button>
+          <button onClick={()=> addToCart("672ede2908c785b6111167c4")} className='bg-black text-white px-8 py-3 text-sm active:bg-gray-700'>PURCHASE NOW</button>
         </div>
       </div>
       <NewsletterBox/>

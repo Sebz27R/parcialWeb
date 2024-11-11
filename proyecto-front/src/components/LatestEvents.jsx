@@ -10,7 +10,7 @@ const LatestEvents = () => {
 
     useEffect(()=> {
         setLatestEvents(events.slice(0,10))
-    },[])
+    },[events])
 
   return (
     <div className='my-10'>

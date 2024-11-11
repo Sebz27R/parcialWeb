@@ -93,4 +93,23 @@ const adminLogin = async (req,res) => {
     }
 }
 
-export {loginUser, registerUser, adminLogin}
+// Nueva ruta para verificar el estado de membresía de un usuario
+const checkMembershipStatus = async (req, res) => {
+    try {
+        const { id } = req.params; // Obtener el id del usuario desde los parámetros de la ruta
+        const user = await userModel.findById(id); // Buscar al usuario en la base de datos
+
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
+        }
+
+        // Devolver el estado de la membresía
+        res.json({ success: true, membershipStatus: user.membership });
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+
+export {loginUser, registerUser, adminLogin, checkMembershipStatus}

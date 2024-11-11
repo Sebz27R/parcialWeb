@@ -9,7 +9,7 @@ const FeaturedModels = () => {
 
     useEffect(()=> {
         setLatestModels(models.slice(0,10))
-    },[])
+    },[models])
 
   return (
     <div className='my-10'>
