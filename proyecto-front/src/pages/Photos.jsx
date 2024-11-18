@@ -85,10 +85,10 @@ const Photos = () => {
           <p className='mb-3 text-sm font-medium'>CATEGORIES</p>
           <div className='flex flex-col gap-2 text-sm font-light text-gray-700'>
             <p className='flex gap-2'>
-              <input className='w-3' type='checkbox' value={'Event'} onChange={toggleCategory}/> Events
+              <input className='w-3' type='checkbox' value={'Events'} onChange={toggleCategory}/> Events
             </p>
             <p className='flex gap-2'>
-              <input className='w-3' type='checkbox' value={'Model'} onChange={toggleCategory}/> Models
+              <input className='w-3' type='checkbox' value={'Models'} onChange={toggleCategory}/> Models
             </p>
           </div>
         </div>

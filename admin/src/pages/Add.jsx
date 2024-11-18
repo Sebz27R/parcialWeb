@@ -15,7 +15,7 @@ const Add = ({token}) => {
   const [description,setDescription] = useState("")
   const [price,setPrice] = useState("")
   const [category,setCategory] = useState("Lipsticks")
-  const [color,setColor] = useState("Red")
+  const [color,setColor] = useState("Purple")
   const [featured, setFeatured] = useState(false)
   const [format,setFormat] = useState([])
 

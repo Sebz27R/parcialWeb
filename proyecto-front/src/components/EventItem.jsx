@@ -1,8 +1,9 @@
-import React from 'react'
-import { models } from '../assets/assets';
-import { products } from '../assets/assets';
+import React, { useContext } from 'react'
+import { ShopContext } from '../context/ShopContext';
 
 const EventItem = ({id, name, image,date, location, participating_models, products_showcased}) => {
+
+    const { models,products} = useContext(ShopContext)
    
     const getModelNames = () => {
         return participating_models.map(id => {
@@ -28,6 +29,11 @@ const EventItem = ({id, name, image,date, location, participating_models, produc
     
       const productNames = getProductNames();
 
+      const formatDate = (dateNumber) => {
+        const date = new Date(dateNumber)
+        return date.toLocaleDateString('es-ES') // Formato dd/mm/aaaa
+      }
+
 
   return (
     
@@ -38,7 +44,7 @@ const EventItem = ({id, name, image,date, location, participating_models, produc
         </div>
         <p className='pt-3 pb-1 text-lg font-bold'>{name}</p>
         <p className='pt-3 pb-1 text-sm'><span className='font-bold'>Location:</span> {location}</p>
-        <p className='text-sm pb-1'><span className='font-bold'>Date:</span> {date}</p>
+        <p className='text-sm pb-1'><span className='font-bold'>Date:</span> {formatDate(date)}</p>
         <p className='text-sm pb-1'><span className='font-bold'>Models participating:</span> {modelNames.map((name, index) => (
           <li key={index} className='text-sm'>{name}</li>
         ))}</p>
