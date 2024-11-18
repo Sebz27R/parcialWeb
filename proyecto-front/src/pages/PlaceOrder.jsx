@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 const PlaceOrder = () => {
 
   const [method,setMethod] = useState('cod')
-  const {navigate, backendUrl, token, cartItems, setCartItems,getCartAmount,delivery_fee,products,susProducts,photos} = useContext(ShopContext)
+  const {navigate, backendUrl, token, cartItems, setCartItems,getCartAmount,delivery_fee,products,susProducts,photos,memberships} = useContext(ShopContext)
   const [formData, setFormData] = useState({
     firstName:'',
     lastName:'',
@@ -36,7 +36,8 @@ const PlaceOrder = () => {
         for (const itemId in cartItems) {
             const itemData = structuredClone(products.find(product => product._id === itemId) 
                              || susProducts.find(susProduct => susProduct._id === itemId) 
-                             || photos.find(photo => photo._id === itemId));
+                             || photos.find(photo => photo._id === itemId))
+                             || memberships.find(membership => membership._id === itemId)
 
             if (!itemData) continue; // Si no se encuentra el producto, salta a la siguiente iteración
 

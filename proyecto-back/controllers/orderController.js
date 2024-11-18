@@ -8,94 +8,119 @@ const deliveryCharge = 10
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY)
 
+const membershipIds = [
+    "672edde208c785b6111167c0",
+    "672ede0608c785b6111167c2",
+    "672ede2908c785b6111167c4",
+];
+
+// Helper function to handle membership updates
+const updateUserMembership = async (userId, items) => {
+    // Verificar si hay membresías en los items
+    const membershipItem = items.find(item => membershipIds.includes(item._id));
+
+    if (membershipItem) {
+        // Actualizar la membresía del usuario
+        await userModel.findByIdAndUpdate(userId, { membership: membershipItem._id });
+    } else {
+        // Si no hay membresía, eliminar el atributo membership
+        await userModel.findByIdAndUpdate(userId, { membership: null });
+    }
+};
+
 // Placing orders using Cash on delivery Method
 
-const placeOrder = async (req,res) =>{
+const placeOrder = async (req, res) => {
     try {
-        const {userId,items,amount,address} = req.body
+        const { userId, items, amount, address } = req.body;
+       
 
         const orderData = {
             userId,
             items,
             address,
             amount,
-            paymentMethod:"COD",
+            paymentMethod: "COD",
             payment: false,
-            date: Date.now()
-        }
+            date: Date.now(),
+        };
 
-        const newOrder = new orderModel(orderData)
+        console.log("Items in order:", items);
 
-        await newOrder.save()
 
-        await userModel.findByIdAndUpdate(userId,{cartData:{}})
+        const newOrder = new orderModel(orderData);
+        await newOrder.save();
 
-        res.json({success:true,message:"Order placed"})
+        // Actualizar membresía del usuario
+        await updateUserMembership(userId, items);
 
+        // Vaciar el carrito del usuario
+        await userModel.findByIdAndUpdate(userId, { cartData: {} });
+
+        res.json({ success: true, message: "Order placed" });
     } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
-}
+};
 
 //Placing orders using Stripe
-const placeOrderStripe = async (req,res) =>{
+const placeOrderStripe = async (req, res) => {
     try {
-        const {userId,items,amount,address} = req.body
-
-        const {origin} = req.headers;
+        const { userId, items, amount, address } = req.body;
+        const { origin } = req.headers;
 
         const orderData = {
             userId,
             items,
             address,
             amount,
-            paymentMethod:"Stripe",
+            paymentMethod: "Stripe",
             payment: false,
-            date: Date.now()
-        }
+            date: Date.now(),
+        };
 
-        const newOrder = new orderModel(orderData)
-        await newOrder.save()
+        const newOrder = new orderModel(orderData);
+        await newOrder.save();
 
-        const line_items = items.map((item)=> ({
+        const line_items = items.map((item) => ({
             price_data: {
                 currency: currency,
                 product_data: {
-                    name:item.name
+                    name: item.name,
                 },
-                unit_amount: item.price * 100
+                unit_amount: item.price * 100,
             },
-            quantity: item.quantity
-        }))
+            quantity: item.quantity,
+        }));
 
         line_items.push({
-            price_data:{
-                currency:currency,
+            price_data: {
+                currency: currency,
                 product_data: {
-                    name:'Delivery Charges'
+                    name: "Delivery Charges",
                 },
-                unit_amount: deliveryCharge * 100
+                unit_amount: deliveryCharge * 100,
             },
-            quantity: 1
-        })
+            quantity: 1,
+        });
 
         const session = await stripe.checkout.sessions.create({
             success_url: `${origin}/verify?success=true&orderId=${newOrder._id}`,
-            cancel_url:  `${origin}/verify?success=false&orderId=${newOrder._id}`,
+            cancel_url: `${origin}/verify?success=false&orderId=${newOrder._id}`,
             line_items,
-            mode: 'payment',
-        })
+            mode: "payment",
+        });
 
-        res.json({success:true, session_url:session.url})
+        // Actualizar membresía del usuario
+        await updateUserMembership(userId, items);
 
-
-
+        res.json({ success: true, session_url: session.url });
     } catch (error) {
-        console.log(error)
-        res.json({success:false,message:error.message})
+        console.log(error);
+        res.json({ success: false, message: error.message });
     }
-}
+};
 
 //List all orders for admin panel
 
@@ -142,4 +167,34 @@ const updateStatus = async (req,res) =>{
     
 }
 
-export {placeOrder, placeOrderStripe, allOrders, userOrders, updateStatus}
+// Check if a user has an active membership
+const checkMembership = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        const user = await userModel.findById(userId).populate("membership");
+
+        if (!user) {
+            return res.json({ success: false, message: "User not found" });
+        }
+
+        if (user.membership) {
+            res.json({
+                success: true,
+                hasMembership: true,
+                membership: user.membership,
+            });
+        } else {
+            res.json({
+                success: true,
+                hasMembership: false,
+                message: "User does not have an active membership",
+            });
+        }
+    } catch (error) {
+        console.log(error);
+        res.json({ success: false, message: error.message });
+    }
+};
+
+export {placeOrder, placeOrderStripe, allOrders, userOrders, updateStatus,checkMembership}

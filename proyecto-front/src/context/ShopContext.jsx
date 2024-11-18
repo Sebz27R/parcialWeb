@@ -21,7 +21,8 @@ const ShopContextProvider = (props) => {
     const [photos,setPhotos] = useState([]) 
     const [models,setModels] = useState([])
     const [memberships,setMemberships] = useState([])
-    const [token,setToken] = useState('')   
+    const [token,setToken] = useState('')
+
 
     const addToCart = async (itemId, format = null) => {
         // Si el producto requiere un formato y no se ha seleccionado, muestra el error
@@ -318,18 +319,31 @@ const ShopContextProvider = (props) => {
         }
     }
 
-    const fetchMembershipStatus = async () => {
+    const checkMembershipStatus = async (token) => {
+    
         try {
-            const response = await fetch(`/api/user/membership-status`, {
-                headers: { Authorization: `Bearer ${token}` }
-            });
-            const data = await response.json();
-            return data.membership; // Suponiendo que el backend devuelve `{ membership: true }`
+            const response = await axios.post(backendUrl + '/api/order/check-membership',{},{headers:{token}});
+            
+            if (response.data.success) {
+                const membershipData = response.data.hasMembership;
+                if (membershipData) {
+                    // Aquí puedes establecer el estado o hacer alguna acción
+                    return true; // Por ejemplo, guardarlo en el estado de membresía
+                } else {
+                    toast.info("User does not have an active membership");
+                    return false
+                }
+            } else {
+                
+                toast.error(response.data.message || "Failed to check membership");
+                return false
+            }
         } catch (error) {
-            console.log(error);
-            return false;
+            console.error("Error checking membership", error);
+            toast.error("Error checking membership status");
         }
     };
+    
     
 
     useEffect(()=>{
@@ -347,6 +361,8 @@ const ShopContextProvider = (props) => {
             getUserCart(localStorage.getItem('token'))
         }
     },[])
+
+    
     
 
     const value = {
@@ -355,7 +371,7 @@ const ShopContextProvider = (props) => {
         cartItems, addToCart, getCartCount,
         updateQuantity, getCartAmount,
         navigate, models, photos, events,requiresFormat,
-        memberships, backendUrl, token, setToken, setCartItems,fetchMembershipStatus
+        memberships, backendUrl, token, setToken, setCartItems,checkMembershipStatus
     }
 
     return (
