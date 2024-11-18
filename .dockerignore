@@ -1,0 +1,8 @@
+# .dockerignore (ubicar en la raíz del proyecto)
+**/node_modules
+**/npm-debug.log
+**/build
+**/.git
+**/.env
+**/*.md
+**/dist
